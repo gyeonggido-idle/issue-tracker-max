@@ -19,11 +19,9 @@ const lightMode = {
     nuetralTextWeak: colorDefault.grayscale600,
     nuetralTextDefault: colorDefault.grayscale700,
     nuetralTextStrong: colorDefault.grayscale900,
-
     nuetralSurfaceDefault: colorDefault.grayscale100,
     nuetralSurfaceBold: colorDefault.grayscale200,
     nuetralSurfaceStrong: colorDefault.grayscale50,
-
     nuetralBorderDefault: colorDefault.grayscale300,
     nuetralBorderDefaultActive: colorDefault.grayscale900,
 
@@ -50,11 +48,9 @@ const darkMode = {
     nuetralTextWeak: colorDefault.grayscale500,
     nuetralTextDefault: colorDefault.grayscale400,
     nuetralTextStrong: colorDefault.grayscale50,
-
     nuetralSurfaceDefault: colorDefault.grayscale900,
     nuetralSurfaceBold: colorDefault.grayscale700,
     nuetralSurfaceStrong: colorDefault.grayscale800,
-
     nuetralBorderDefault: colorDefault.grayscale600,
     nuetralBorderDefaultActive: colorDefault.grayscale300,
 

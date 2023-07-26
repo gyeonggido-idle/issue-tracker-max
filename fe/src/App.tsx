@@ -18,6 +18,7 @@ export const App = () => {
   const [currentMode, setCurrentMode] = useState<ThemeMode>('light');
   console.log(setCurrentMode);
 
+
   return (
     <>
       <ThemeProvider theme={theme[currentMode]}>
