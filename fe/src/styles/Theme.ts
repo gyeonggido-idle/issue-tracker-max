@@ -16,16 +16,16 @@ const colorDefault = {
 
 const lightMode = {
   color: {
-    textWeak: colorDefault.grayscale600,
-    textDefault: colorDefault.grayscale700,
-    textStrong: colorDefault.grayscale900,
+    nuetralTextWeak: colorDefault.grayscale600,
+    nuetralTextDefault: colorDefault.grayscale700,
+    nuetralTextStrong: colorDefault.grayscale900,
 
-    surfaceDefault: colorDefault.grayscale100,
-    surfaceBold: colorDefault.grayscale200,
-    surfaceStrong: colorDefault.grayscale50,
+    nuetralSurfaceDefault: colorDefault.grayscale100,
+    nuetralSurfaceBold: colorDefault.grayscale200,
+    nuetralSurfaceStrong: colorDefault.grayscale50,
 
-    borderDefault: colorDefault.grayscale300,
-    borderDefaultActive: colorDefault.grayscale900,
+    nuetralBorderDefault: colorDefault.grayscale300,
+    nuetralBorderDefaultActive: colorDefault.grayscale900,
 
     brandTextWeak: colorDefault.accentBlue,
     brandTextDefault: colorDefault.grayscale50,
@@ -47,16 +47,16 @@ const lightMode = {
 
 const darkMode = {
   color: {
-    textWeak: colorDefault.grayscale500,
-    textDefault: colorDefault.grayscale400,
-    textStrong: colorDefault.grayscale50,
+    nuetralTextWeak: colorDefault.grayscale500,
+    nuetralTextDefault: colorDefault.grayscale400,
+    nuetralTextStrong: colorDefault.grayscale50,
 
-    surfaceDefault: colorDefault.grayscale900,
-    surfaceBold: colorDefault.grayscale700,
-    surfaceStrong: colorDefault.grayscale800,
+    nuetralSurfaceDefault: colorDefault.grayscale900,
+    nuetralSurfaceBold: colorDefault.grayscale700,
+    nuetralSurfaceStrong: colorDefault.grayscale800,
 
-    borderDefault: colorDefault.grayscale600,
-    borderDefaultActive: colorDefault.grayscale300,
+    nuetralBorderDefault: colorDefault.grayscale600,
+    nuetralBorderDefaultActive: colorDefault.grayscale300,
 
     brandTextWeak: colorDefault.accentBlue,
     brandTextDefault: colorDefault.grayscale50,
