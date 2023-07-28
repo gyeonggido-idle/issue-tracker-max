@@ -25,9 +25,9 @@
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
-      "styles/*": ["styles/*"]
+      "styles/*": ["styles/*"],
     }
   },
-  "include": ["src"],
+  "include": ["src", "svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
