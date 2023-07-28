@@ -26,6 +26,7 @@
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
       "styles/*": ["styles/*"],
+      "contexts/*": ["contexts/*"]
     }
   },
   "include": ["src", "svg.d.ts"],
