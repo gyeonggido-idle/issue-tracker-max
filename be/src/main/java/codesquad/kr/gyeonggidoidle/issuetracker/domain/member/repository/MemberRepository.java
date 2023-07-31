@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class MemberRepository {
@@ -16,6 +17,14 @@ public class MemberRepository {
     @Autowired
     public MemberRepository(DataSource dataSource) {
         this.template = new NamedParameterJdbcTemplate(dataSource);
+    }
+
+    public Map<Long, List<String>> findAllProfilesByIssueIds(List<Long> issueIds ) {
+        return issueIds.stream()
+                .collect(Collectors.toUnmodifiableMap(
+                        issueId -> issueId,
+                        this::findAllProfilesByIssueId
+                ));
     }
 
     public List<String> findAllProfilesByIssueId(Long issueId) {
