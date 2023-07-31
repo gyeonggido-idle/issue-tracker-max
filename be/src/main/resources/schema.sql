@@ -10,7 +10,7 @@ DROP Table if exists file;
 CREATE TABLE member
 (
     id       bigint AUTO_INCREMENT,
-    email    varchar(255)  NOT NULL UNIQUE,
+    email    varchar(255) NOT NULL UNIQUE,
     name     varchar(50)  NOT NULL,
     password varchar(50)  NOT NULL,
     profile  varchar(255) NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE milestone
     name        varchar(50) NOT NULL,
     due_date    date        NOT NULL,
     description varchar(255),
-    status      varchar(20) NOT NULL default 'open',
-    deleted     boolean     NOT NULL default FALSE,
+    is_open     boolean     NOT NULL default TRUE,
+    is_deleted  boolean     NOT NULL default FALSE,
     PRIMARY KEY (id)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE label
     description      varchar(255),
     background_color varchar(20) NOT NULL,
     text_color       varchar(20) NOT NULL,
-    deleted          boolean     NOT NULL default FALSE,
+    is_deleted       boolean     NOT NULL default FALSE,
     PRIMARY KEY (id)
 );
 
@@ -68,8 +68,8 @@ CREATE TABLE issue
     author_id    bigint      NOT NULL,
     milestone_id bigint,
     title        varchar(50) NOT NULL,
-    status       varchar(20) NOT NULL default 'open',
-    deleted      boolean     NOT NULL default FALSE,
+    is_open      boolean     NOT NULL default TRUE,
+    is_deleted   boolean     NOT NULL default FALSE,
     created_at   timestamp            default current_timestamp,
     PRIMARY KEY (id)
 );
@@ -81,7 +81,7 @@ CREATE TABLE comment
     author_id  bigint       NOT NULL,
     file_id    bigint,
     contents   varchar(255) NOT NULL,
-    deleted    boolean      NOT NULL default FALSE,
+    is_deleted boolean      NOT NULL default FALSE,
     created_at timestamp             default CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );

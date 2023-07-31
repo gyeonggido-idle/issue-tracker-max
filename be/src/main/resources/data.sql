@@ -3,22 +3,22 @@ values ('nag@codesquad.kr', 'nag', '1q2w3e4r!', 'https://e7.pngegg.com/pngimages
        ('joy@codesquad.kr', 'joy', '1q2w3e4r!', 'https://e7.pngegg.com/pngimages/981/645/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette.png'),
        ('ati@codesquad.kr', 'ati', '1q2w3e4r!', 'https://e7.pngegg.com/pngimages/981/645/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette.png');
 
-INSERT INTO milestone (name, due_date)
-values ('마일스톤 1', current_date),
-       ('마일스톤 2', current_date),
-       ('마일스톤 3', current_date);
+INSERT INTO milestone (name, due_date, is_open)
+values ('마일스톤 1', current_date, 1),
+       ('마일스톤 2', current_date, 0),
+       ('마일스톤 3', current_date, 1);
 
 INSERT INTO label (name, background_color, text_color)
 values ('라벨 1', '#F08080', '#000000'),
        ('라벨 2', '#98FB98', '#000000'),
        ('라벨 3', '#6495ED', '#000000');
 
-INSERT INTO issue (author_id, milestone_id, title)
-values (1, 1, '제목 1'),
-       (2, 2, '제목 2'),
-       (3, 3, '제목 3'),
-       (3, 1, '제목 4'),
-       (1, 1, '제목 5');
+INSERT INTO issue (author_id, milestone_id, title, is_open)
+values (1, 1, '제목 1', 1),
+       (2, 2, '제목 2', 0),
+       (3, 3, '제목 3', 1),
+       (3, 1, '제목 4', 0),
+       (1, 1, '제목 5', 0);
 
 INSERT INTO issue_label (issue_id, label_id)
 values (1, 1),
