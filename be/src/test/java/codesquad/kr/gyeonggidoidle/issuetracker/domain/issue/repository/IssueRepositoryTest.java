@@ -1,7 +1,6 @@
-package codesquad.kr.gyeonggidoidle.issuetracker.repository;
+package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.RepositoryTest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.IssueRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.sql.DataSource;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RepositoryTest
 public class IssueRepositoryTest {

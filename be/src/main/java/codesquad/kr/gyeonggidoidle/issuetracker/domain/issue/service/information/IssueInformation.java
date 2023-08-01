@@ -49,6 +49,7 @@ public class IssueInformation {
                 .assigneeProfiles(assigneeProfiles.get(issueVO.getId()))
                 .milestone(issueVO.getMilestone())
                 .labelInformations(LabelInformation.from(labelVOs.get(issueVO.getId())))
+                .createdAt(issueVO.getCreatedAt())
                 .build();
     }
 }
