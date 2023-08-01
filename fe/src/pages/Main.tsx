@@ -1,7 +1,15 @@
 import styled from "styled-components";
+import {
+  IssueListHeader,
+  ChangeStateHeader,
+} from "components/Header/IssueListHeader";
+
 export const MainPage = () => {
   return (
     <Content>
+      <IssueListHeader />
+      <ChangeStateHeader />
+      {/* <IssueTable/> */}
     </Content>
   );
 };
