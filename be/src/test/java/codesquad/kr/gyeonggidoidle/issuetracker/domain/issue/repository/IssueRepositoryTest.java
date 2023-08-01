@@ -27,8 +27,8 @@ public class IssueRepositoryTest {
         List<IssueVO> actualValue = repository.findOpenIssues();
 
         assertThat(actualValue.size()).isEqualTo(2);
-        assertThat(actualValue.get(1).getTitle()).isEqualTo("제목 3");
-        assertThat(actualValue.get(0).getAuthor()).isEqualTo("nag");
+        assertThat(actualValue.get(1).getTitle()).isEqualTo("제목 1");
+        assertThat(actualValue.get(0).getAuthor()).isEqualTo("ati");
     }
 
     @DisplayName("DB에서 닫힌 이슈를 불러온다.")
@@ -37,8 +37,8 @@ public class IssueRepositoryTest {
         List<IssueVO> actualValue = repository.findClosedIssues();
 
         assertThat(actualValue.size()).isEqualTo(3);
-        assertThat(actualValue.get(0).getId()).isEqualTo(2);
-        assertThat(actualValue.get(2).getMilestone()).isEqualTo("마일스톤 1");
+        assertThat(actualValue.get(0).getId()).isEqualTo(5);
+        assertThat(actualValue.get(2).getMilestone()).isEqualTo("마일스톤 2");
 
     }
 }

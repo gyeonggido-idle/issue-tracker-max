@@ -30,7 +30,8 @@ public class IssueRepository {
                 "FROM issue i " +
                 "LEFT JOIN member me ON i.author_id = me.id " +
                 "LEFT JOIN milestone m ON i.milestone_id = m.id " +
-                "WHERE i.is_open = true";
+                "WHERE i.is_open = true " +
+                "ORDER BY i.id DESC";
 
         return template.query(sql, issueVOMapper);
     }
@@ -44,7 +45,8 @@ public class IssueRepository {
                 "FROM issue i " +
                 "LEFT JOIN member me ON i.author_id = me.id " +
                 "LEFT JOIN milestone m ON i.milestone_id = m.id " +
-                "WHERE i.is_open = false";
+                "WHERE i.is_open = false " +
+                "ORDER BY i.id DESC";
 
         return template.query(sql, issueVOMapper);
     }
