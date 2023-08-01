@@ -31,10 +31,11 @@ public class LabelRepository {
 
     public List<LabelVO> findAllByIssueId(Long issueId) {
         String sql = "SELECT l.name, l.background_color, l.text_color " +
-                "FROM label AS l " +
-                "LEFT JOIN issue_label AS i " +
+                "FROM issue_label AS i " +
+                "LEFT JOIN label AS l " +
                 "ON l.id = i.label_id " +
-                "WHERE i.issue_id = :issueId";
+                "WHERE i.issue_id = :issueId " +
+                "AND l.is_deleted = FALSE";
 
         return template.query(sql, Map.of("issueId", issueId), labelRowMapper());
     }
