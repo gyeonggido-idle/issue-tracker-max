@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { DropdownIndicator } from "components/Dropdown/DropdownIndicator";
 import { Icon } from "components/Common/Icon/Icon";
 
+
 /* Indicator 수정해야함~~ */
 interface FilterBarProps {
   onIndicatorClick: (id: string) => void;
@@ -32,6 +33,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ onIndicatorClick }) => {
         <Icon icon="Search" stroke="nuetralTextDefault"></Icon>
         <InputBox onFocus={handleFocus} onBlur={handleBlur} />
       </InputArea>
+
     </FilterBarLayout>
   );
 };
