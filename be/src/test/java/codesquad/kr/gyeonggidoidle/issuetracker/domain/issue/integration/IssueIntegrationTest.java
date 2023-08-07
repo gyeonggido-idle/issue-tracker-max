@@ -8,7 +8,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,7 +19,7 @@ class IssueIntegrationTest {
 
     @DisplayName("열린 이슈의 모든 정보를 다 가지고 온다.")
     @Test
-    void openIssueIntegrationTest() throws Exception {
+    void getOpenIssues() throws Exception {
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/issues/open"));
 
@@ -39,7 +38,7 @@ class IssueIntegrationTest {
 
     @DisplayName("닫힌 이슈의 모든 정보를 다 가지고 온다.")
     @Test
-    void closedIssueIntegrationTest() throws Exception {
+    void getClosedIssues() throws Exception {
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/issues/closed"));
 
@@ -58,7 +57,7 @@ class IssueIntegrationTest {
 
     @DisplayName("메인 화면의 필터 목록을 가지고 온다.")
     @Test
-    void testReadFilters() throws Exception {
+    void getFilters() throws Exception {
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/filters"));
 
@@ -76,7 +75,7 @@ class IssueIntegrationTest {
 
     @DisplayName("이슈 화면의 필터 목록을 가지고 온다.")
     @Test
-    void testReadFiltersByIssue() throws Exception {
+    void getFiltersByIssue() throws Exception {
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/issues"));
 

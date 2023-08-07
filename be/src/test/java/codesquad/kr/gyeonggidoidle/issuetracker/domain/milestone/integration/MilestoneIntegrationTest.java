@@ -1,16 +1,15 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.milestone.integration;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @IntegrationTest
 class MilestoneIntegrationTest {
@@ -20,9 +19,11 @@ class MilestoneIntegrationTest {
 
     @DisplayName("열린 마일스톤의 모드 정보를 가지고 온다.")
     @Test
-    void testReadOpenMilestones() throws Exception {
+    void getOpenMilestones() throws Exception {
+        //when
         ResultActions resultActions = mockMvc.perform(get("/api/milestones/open"));
 
+        //then
         resultActions
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -36,9 +37,11 @@ class MilestoneIntegrationTest {
 
     @DisplayName("닫힌 마일스톤의 모드 정보를 가지고 온다.")
     @Test
-    void testReadClosedMilestones() throws Exception {
+    void readClosedMilestones() throws Exception {
+        //when
         ResultActions resultActions = mockMvc.perform(get("/api/milestones/closed"));
 
+        //then
         resultActions
                 .andExpect(status().isOk())
                 .andExpectAll(

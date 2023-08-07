@@ -1,16 +1,9 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.label.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ControllerTest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.LabelService;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.information.LabelDetailsInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.information.LabelPageInformation;
-
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +11,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.List;
+
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 @ControllerTest(LabelController.class)
 class LabelControllerTest {
@@ -33,11 +29,14 @@ class LabelControllerTest {
 
     @DisplayName("라벨 관리페이지 정보를 담은 LabelPageInformation을 LabelPageResponse으로 변환한다.")
     @Test
-    void testReadLabelPage() throws Exception {
+    void transformLabelPageInformation() throws Exception {
+        //given
         given(labelService.readLabelPage()).willReturn(createDummyLabelPageInformation());
 
+        //when
         ResultActions resultActions = mockMvc.perform(get("/api/labels"));
 
+        //then
         resultActions
                 .andExpect(status().isOk())
                 .andExpectAll(
@@ -46,7 +45,6 @@ class LabelControllerTest {
                         jsonPath("$.labels.[0].name").value("feat"),
                         jsonPath("$.labels.[1].textColor").value("##")
                 );
-
     }
 
     private LabelPageInformation createDummyLabelPageInformation() {

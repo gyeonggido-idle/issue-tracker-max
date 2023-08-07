@@ -3,13 +3,7 @@ package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller;
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ControllerTest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.contoller.IssueController;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.IssueService;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.AssigneeFilterInformation;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.FilterInformation;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.FilterListInformation;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.IssueInformation;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.LabelFilterInformation;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.AuthorFilterInformation;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.MilestoneFilterInformation;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.*;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.information.LabelInformation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,10 +18,8 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 @ControllerTest(IssueController.class)
 class IssueControllerTest {
@@ -40,7 +32,7 @@ class IssueControllerTest {
 
     @DisplayName("열린 이슈에 관한 FilterInformation을 FilterResponse로 변환한다.")
     @Test
-    void readOpenIssuesTest() throws Exception {
+    void readOpenIssues() throws Exception {
         //given
         given(issueService.readOpenIssues()).willReturn(createDummyFilterInformation());
 
@@ -61,7 +53,7 @@ class IssueControllerTest {
 
     @DisplayName("닫힌 이슈에 관한 FilterInformation을 FilterResponse로 변환한다.")
     @Test
-    void readClosedIssuesTest() throws Exception {
+    void readClosedIssues() throws Exception {
         //given
         given(issueService.readClosedIssues()).willReturn(createDummyFilterInformation());
 
@@ -82,7 +74,7 @@ class IssueControllerTest {
 
     @DisplayName("메인 화면의 필터 내용을 담은 FilterListInformation을 FilterListResponse으로 변환한다.")
     @Test
-    void testReadFilters() throws Exception {
+    void readFilters() throws Exception {
         //given
         given(issueService.readFilters()).willReturn(createDummyFilterListInformation());
 
@@ -103,7 +95,7 @@ class IssueControllerTest {
 
     @DisplayName("이슈 화면의 필터 내용을 담은 FilterListInformation을 FilterListResponse으로 변환한다.")
     @Test
-    void testReadFiltersFromIssue() throws Exception {
+    void readFiltersFromIssue() throws Exception {
         //given
         given(issueService.readFiltersFromIssue()).willReturn(createDummyFilterListInformationByIssue());
 
