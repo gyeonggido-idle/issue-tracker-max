@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 @IntegrationTest
-public class MilestoneIntegrationTest {
+class MilestoneIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,12 +25,13 @@ public class MilestoneIntegrationTest {
 
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.openMilestoneCount").value(3))
-                .andExpect(jsonPath("$.closeMilestoneCount").value(1))
-                .andExpect(jsonPath("$.labelCount").value(4))
-                .andExpect(jsonPath("$.milestones.length()").value(3))
-                .andExpect(jsonPath("$.milestones.[0].name").value("마일스톤 0"))
-                .andDo(print());
+                .andExpectAll(
+                        jsonPath("$.openMilestoneCount").value(3),
+                        jsonPath("$.closeMilestoneCount").value(1),
+                        jsonPath("$.labelCount").value(4),
+                        jsonPath("$.milestones.length()").value(3),
+                        jsonPath("$.milestones.[0].name").value("마일스톤 0")
+                );
     }
 
     @DisplayName("닫힌 마일스톤의 모드 정보를 가지고 온다.")
@@ -40,11 +41,12 @@ public class MilestoneIntegrationTest {
 
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.openMilestoneCount").value(3))
-                .andExpect(jsonPath("$.closeMilestoneCount").value(1))
-                .andExpect(jsonPath("$.labelCount").value(4))
-                .andExpect(jsonPath("$.milestones.length()").value(1))
-                .andExpect(jsonPath("$.milestones.[0].name").value("마일스톤 2"))
-                .andDo(print());
+                .andExpectAll(
+                        jsonPath("$.openMilestoneCount").value(3),
+                        jsonPath("$.closeMilestoneCount").value(1),
+                        jsonPath("$.labelCount").value(4),
+                        jsonPath("$.milestones.length()").value(1),
+                        jsonPath("$.milestones.[0].name").value("마일스톤 2")
+                );
     }
 }

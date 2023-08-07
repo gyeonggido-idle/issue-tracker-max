@@ -8,7 +8,9 @@ import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ControllerTest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.LabelService;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.information.LabelDetailsInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.information.LabelPageInformation;
+
 import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @ControllerTest(LabelController.class)
-public class LabelControllerTest {
+class LabelControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
     @MockBean
     private LabelService labelService;
 
@@ -37,10 +40,12 @@ public class LabelControllerTest {
 
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.milestoneCount").value(10))
-                .andExpect(jsonPath("$.labels.length()").value(2))
-                .andExpect(jsonPath("$.labels.[0].name").value("feat"))
-                .andExpect(jsonPath("$.labels.[1].textColor").value("##"));
+                .andExpectAll(
+                        jsonPath("$.milestoneCount").value(10),
+                        jsonPath("$.labels.length()").value(2),
+                        jsonPath("$.labels.[0].name").value("feat"),
+                        jsonPath("$.labels.[1].textColor").value("##")
+                );
 
     }
 
@@ -69,5 +74,4 @@ public class LabelControllerTest {
                 .build();
         return List.of(tmp1, tmp2);
     }
-
 }

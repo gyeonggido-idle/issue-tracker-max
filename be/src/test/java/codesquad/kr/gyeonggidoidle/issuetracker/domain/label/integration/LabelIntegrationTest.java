@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 @IntegrationTest
-public class LabelIntegrationTest {
+class LabelIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -26,10 +26,11 @@ public class LabelIntegrationTest {
 
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.milestoneCount").value(4))
-                .andExpect(jsonPath("$.labelCount").value(4))
-                .andExpect(jsonPath("$.labels.length()").value(4))
-                .andExpect(jsonPath("$.labels.[0].name").value("라벨 0"))
-                .andDo(print());
+                .andExpectAll(
+                        jsonPath("$.milestoneCount").value(4),
+                        jsonPath("$.labelCount").value(4),
+                        jsonPath("$.labels.length()").value(4),
+                        jsonPath("$.labels.[0].name").value("라벨 0")
+                );
     }
 }

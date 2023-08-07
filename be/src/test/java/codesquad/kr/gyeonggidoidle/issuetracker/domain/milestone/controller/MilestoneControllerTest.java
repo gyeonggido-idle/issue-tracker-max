@@ -8,8 +8,10 @@ import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ControllerTest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.milestone.service.MilestoneService;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.milestone.service.information.MilestoneDetailsInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.milestone.service.information.MilestonePageInformation;
+
 import java.time.LocalDate;
 import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +41,13 @@ public class MilestoneControllerTest {
 
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.closeMilestoneCount").value(0))
-                .andExpect(jsonPath("$.labelCount").value(6))
-                .andExpect(jsonPath("$.milestones.length()").value(2))
-                .andExpect(jsonPath("$.milestones.[0].dueDate").value("2024-12-25"))
-                .andExpect(jsonPath("$.milestones.[1].name").value("tmp2"));
+                .andExpectAll(
+                        jsonPath("$.closeMilestoneCount").value(0),
+                        jsonPath("$.labelCount").value(6),
+                        jsonPath("$.milestones.length()").value(2),
+                        jsonPath("$.milestones.[0].dueDate").value("2024-12-25"),
+                        jsonPath("$.milestones.[1].name").value("tmp2")
+                );
     }
 
     private MilestonePageInformation createDummyMilestonePageInformation() {
@@ -60,7 +64,7 @@ public class MilestoneControllerTest {
                 .id(1L)
                 .name("tmp1")
                 .description("test")
-                .dueDate(LocalDate.of(2024,12,25))
+                .dueDate(LocalDate.of(2024, 12, 25))
                 .openIssueCount(1)
                 .closedIssuesCount(2)
                 .build();
@@ -74,5 +78,4 @@ public class MilestoneControllerTest {
                 .build();
         return List.of(tmp1, tmp2);
     }
-
 }
