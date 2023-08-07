@@ -6,6 +6,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.member.repository.vo.Memb
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -18,8 +19,8 @@ public class MemberRepositoryTest {
     private MemberRepository repository;
 
     @Autowired
-    public MemberRepositoryTest(DataSource dataSource) {
-        this.repository = new MemberRepository(dataSource);
+    public MemberRepositoryTest(NamedParameterJdbcTemplate template) {
+        this.repository = new MemberRepository(template);
     }
 
     @DisplayName("이슈아이디로 해당 이슈의 모든 할당자의 프로필을 가지고 온다.")
