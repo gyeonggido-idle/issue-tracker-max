@@ -5,6 +5,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.Issue
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -17,8 +18,8 @@ public class IssueRepositoryTest {
     private final IssueRepository repository;
 
     @Autowired
-    public IssueRepositoryTest(DataSource dataSource) {
-        this.repository = new IssueRepository(dataSource);
+    public IssueRepositoryTest(NamedParameterJdbcTemplate template) {
+        this.repository = new IssueRepository(template);
     }
 
     @DisplayName("DB에서 열린 이슈를 불러온다.")

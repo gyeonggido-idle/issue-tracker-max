@@ -2,6 +2,7 @@ package codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.VO.LabelDetailsVO;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.VO.LabelVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -13,15 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Repository
 public class LabelRepository {
 
     private final NamedParameterJdbcTemplate template;
-
-    @Autowired
-    public LabelRepository(DataSource dataSource) {
-        this.template = new NamedParameterJdbcTemplate(dataSource);
-    }
 
     public Map<Long, List<LabelVO>> findAllByIssueIds(List<Long> issueIds) {
         return issueIds.stream()

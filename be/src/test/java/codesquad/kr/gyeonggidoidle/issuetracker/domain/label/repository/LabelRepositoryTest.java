@@ -6,6 +6,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.VO.Label
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -18,8 +19,8 @@ public class LabelRepositoryTest {
     private LabelRepository repository;
 
     @Autowired
-    public LabelRepositoryTest(DataSource dataSource) {
-        this.repository = new LabelRepository(dataSource);
+    public LabelRepositoryTest(NamedParameterJdbcTemplate template) {
+        this.repository = new LabelRepository(template);
     }
 
     @DisplayName("이슈 아이디로 해당 이슈의 모든 label 정보를 불러온다.")

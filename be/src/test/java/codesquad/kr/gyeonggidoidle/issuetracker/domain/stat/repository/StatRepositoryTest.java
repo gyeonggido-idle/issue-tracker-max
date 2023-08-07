@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
-import javax.sql.DataSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,8 +21,8 @@ public class StatRepositoryTest {
     private StatRepository repository;
 
     @Autowired
-    public StatRepositoryTest(DataSource dataSource) {
-        this.repository = new StatRepository(dataSource);
+    public StatRepositoryTest(NamedParameterJdbcTemplate template) {
+        this.repository = new StatRepository(template);
     }
 
     @DisplayName("전체적인 통계 정보를 가져온다.")

@@ -1,6 +1,7 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -10,15 +11,11 @@ import javax.sql.DataSource;
 import java.util.List;
 
 
+@RequiredArgsConstructor
 @Repository
 public class IssueRepository {
 
     private final NamedParameterJdbcTemplate template;
-
-    @Autowired
-    public IssueRepository(DataSource dataSource) {
-        this.template = new NamedParameterJdbcTemplate(dataSource);
-    }
 
     public List<IssueVO> findOpenIssues() {
         String sql = "SELECT issue.id, " +
