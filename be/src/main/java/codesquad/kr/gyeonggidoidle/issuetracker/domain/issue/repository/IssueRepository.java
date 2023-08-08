@@ -1,24 +1,25 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @Repository
 public class IssueRepository {
 
     private final NamedParameterJdbcTemplate template;
-
-    @Autowired
-    public IssueRepository(DataSource dataSource) {
-        this.template = new NamedParameterJdbcTemplate(dataSource);
-    }
+    private final RowMapper<IssueVO> issueVOMapper = (rs, rowNum) -> IssueVO.builder()
+            .id(rs.getLong("id"))
+            .author(rs.getString("author_name"))
+            .milestone(rs.getString("milestone_name"))
+            .title(rs.getString("title"))
+            .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
+            .build();
 
     public List<IssueVO> findOpenIssues() {
         String sql = "SELECT issue.id, " +
@@ -49,12 +50,4 @@ public class IssueRepository {
 
         return template.query(sql, issueVOMapper);
     }
-
-    private final RowMapper<IssueVO> issueVOMapper = (rs, rowNum) -> IssueVO.builder()
-            .id(rs.getLong("id"))
-            .author(rs.getString("author_name"))
-            .milestone(rs.getString("milestone_name"))
-            .title(rs.getString("title"))
-            .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
-            .build();
 }
