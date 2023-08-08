@@ -6,6 +6,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.Issue
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,46 +14,47 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @Repository
 public class IssueRepository {
 
     private final NamedParameterJdbcTemplate template;
-
-    @Autowired
-    public IssueRepository(DataSource dataSource) {
-        this.template = new NamedParameterJdbcTemplate(dataSource);
-    }
+    private final RowMapper<IssueVO> issueVOMapper = (rs, rowNum) -> IssueVO.builder()
+            .id(rs.getLong("id"))
+            .author(rs.getString("author_name"))
+            .milestone(rs.getString("milestone_name"))
+            .title(rs.getString("title"))
+            .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
+            .build();
 
     public List<IssueVO> findOpenIssues() {
-        String sql = "SELECT i.id, " +
-                "m.name AS milestone_name, " +
-                "me.name AS author_name, " +
-                "i.title, " +
-                "i.created_at " +
-                "FROM issue i " +
-                "LEFT JOIN member me ON i.author_id = me.id " +
-                "LEFT JOIN milestone m ON i.milestone_id = m.id " +
-                "WHERE i.is_open = true " +
-                "ORDER BY i.id DESC";
+        String sql = "SELECT issue.id, " +
+                "milestone.name AS milestone_name, " +
+                "member.name AS author_name, " +
+                "issue.title, " +
+                "issue.created_at " +
+                "FROM issue " +
+                "LEFT JOIN member ON issue.author_id = member.id " +
+                "LEFT JOIN milestone ON issue.milestone_id = milestone.id " +
+                "WHERE issue.is_open = true AND issue.is_deleted = false " +
+                "ORDER BY issue.id DESC";
 
         return template.query(sql, issueVOMapper);
     }
 
     public List<IssueVO> findClosedIssues() {
-        String sql = "SELECT i.id, " +
-                "m.name AS milestone_name, " +
-                "me.name AS author_name, " +
-                "i.title, " +
-                "i.created_at " +
-                "FROM issue i " +
-                "LEFT JOIN member me ON i.author_id = me.id " +
-                "LEFT JOIN milestone m ON i.milestone_id = m.id " +
-                "WHERE i.is_open = false " +
-                "ORDER BY i.id DESC";
+        String sql = "SELECT issue.id, " +
+                "milestone.name AS milestone_name, " +
+                "member.name AS author_name, " +
+                "issue.title, " +
+                "issue.created_at " +
+                "FROM issue " +
+                "LEFT JOIN member ON issue.author_id = member.id " +
+                "LEFT JOIN milestone ON issue.milestone_id = milestone.id " +
+                "WHERE issue.is_open = false AND issue.is_deleted = false " +
+                "ORDER BY issue.id DESC";
 
         return template.query(sql, issueVOMapper);
     }

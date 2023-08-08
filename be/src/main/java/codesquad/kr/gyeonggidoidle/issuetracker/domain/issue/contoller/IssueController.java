@@ -4,6 +4,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.contoller.request.I
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.contoller.request.IssueStatusRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.contoller.request.IssueUpdateRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.contoller.response.ApiResponse;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.contoller.response.FilterListResponse;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.contoller.response.FilterResponse;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.IssueService;
 import lombok.RequiredArgsConstructor;
@@ -61,5 +62,14 @@ public class IssueController {
     public ApiResponse updateIssue(@PathVariable Long issueId, @RequestBody IssueUpdateRequest request) {
         issueService.updateIssue(IssueUpdateRequest.to(issueId, request));
         return ApiResponse.success(HttpStatus.OK);
+      
+    @GetMapping("/api/filters")
+    public FilterListResponse readFilters() {
+        return FilterListResponse.from(issueService.readFilters());
+    }
+
+    @GetMapping("/api/issues")
+    public FilterListResponse readFiltersFromIssue() {
+        return FilterListResponse.from(issueService.readFiltersFromIssue());
     }
 }
