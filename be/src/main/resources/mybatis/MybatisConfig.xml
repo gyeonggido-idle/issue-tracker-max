@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="testVO" type="codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.repository.VO.TestVO" />
+        <typeAlias alias="IssueVO" type="codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO" />
     </typeAliases>
     <environments default="development">
         <environment id="development">
