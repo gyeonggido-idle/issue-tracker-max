@@ -5,7 +5,7 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="IssueVO" type="codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO"/>
-        <typeAlias alias="FilterCondition" type="codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.FilterCondition" />
+        <typeAlias alias="FilterCondition" type="codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.Filter" />
     </typeAliases>
     <environments default="development">
         <environment id="development">
