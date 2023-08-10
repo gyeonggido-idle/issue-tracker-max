@@ -1,7 +1,7 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.FilterCondition;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.Filter;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,14 +37,14 @@ class FilteredIssueRepositoryTest {
     @Test
     void findFilteredIssues() {
         //given
-        FilterCondition filterCondition = FilterCondition.builder()
+        Filter filter = Filter.builder()
                 .isOpen(true)
                 .assignee("nag")
                 .label("라벨 1")
                 .build();
 
         //when
-        List<IssueVO> actual = repository.findByFilter(filterCondition);
+        List<IssueVO> actual = repository.findByFilter(filter);
 
         //then
         assertSoftly(assertions -> {
@@ -57,7 +57,7 @@ class FilteredIssueRepositoryTest {
     @DisplayName("필터조건에 맞는 이슈가 없으면 ")
     @Test
     void findEmptyIssues() {
-        FilterCondition filterCondition = FilterCondition.builder()
+        Filter filter = Filter.builder()
                 .isOpen(false)
                 .assignee("nag")
                 .label("라벨 2")
@@ -65,7 +65,7 @@ class FilteredIssueRepositoryTest {
                 .build();
 
         //when
-        List<IssueVO> actual = repository.findByFilter(filterCondition);
+        List<IssueVO> actual = repository.findByFilter(filter);
 
         //then
         assertThat(actual).isEmpty();

@@ -25,6 +25,14 @@ public class IssueController {
     @GetMapping("/api/issues/closed")
     public FilterResponse readCloseIssues() {
         return FilterResponse.from(issueService.readClosedIssues());
+
+    }@GetMapping("/api/issues")
+    public FilterResponse readFiltedIssues(@RequestParam(name = "q", required = false) String encodedQuery) {
+        if (encodedQuery.isEmpty()) {
+
+
+        }
+        return FilterResponse.from(issueService.readClosedIssues());
     }
 
     @PatchMapping("/api/issues")
