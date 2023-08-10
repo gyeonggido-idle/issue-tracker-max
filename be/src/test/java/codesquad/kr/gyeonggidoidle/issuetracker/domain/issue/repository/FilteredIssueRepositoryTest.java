@@ -5,6 +5,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.F
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 @MybatisTest
@@ -31,6 +33,7 @@ class FilteredIssueRepositoryTest {
         }
     }
 
+    @DisplayName("필터된 이슈들을 가지고 온다.")
     @Test
     void findFilteredIssues() {
         //given
@@ -49,5 +52,22 @@ class FilteredIssueRepositoryTest {
            assertions.assertThat(actual.get(0).getId()).isEqualTo(3L);
            assertions.assertThat(actual.get(1).getAuthor()).isEqualTo("nag");
         });
+    }
+
+    @DisplayName("필터조건에 맞는 이슈가 없으면 ")
+    @Test
+    void findEmptyIssues() {
+        FilterCondition filterCondition = FilterCondition.builder()
+                .isOpen(false)
+                .assignee("nag")
+                .label("라벨 2")
+                .author("nag")
+                .build();
+
+        //when
+        List<IssueVO> actual = repository.findByFilter(filterCondition);
+
+        //then
+        assertThat(actual).isEmpty();
     }
 }
