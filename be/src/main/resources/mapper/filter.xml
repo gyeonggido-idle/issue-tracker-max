@@ -3,12 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.FilteredIssueRepository">
-    <select id="findByFilter" resultType="IssueVO" parameterType="FilterCondition">
-        SELECT issue.id,
-               issue.title,
-               author.name AS author_name,
-               milestone.name AS milestone_name,
-               issue.created_at
+    <select id="findByFilter" resultType="IssueVO" parameterType="Filter">
+        SELECT DISTINCT issue.id,
+                        issue.title,
+                        author.name AS author_name,
+                        milestone.name AS milestone_name,
+                        issue.created_at
         FROM issue
             LEFT JOIN member AS author
                 ON issue.author_id = author.id

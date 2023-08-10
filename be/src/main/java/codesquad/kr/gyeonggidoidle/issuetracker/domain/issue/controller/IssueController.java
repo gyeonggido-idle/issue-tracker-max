@@ -10,6 +10,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.IssueServic
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriUtils;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,14 +26,14 @@ public class IssueController {
     @GetMapping("/api/issues/closed")
     public FilterResponse readCloseIssues() {
         return FilterResponse.from(issueService.readClosedIssues());
-
-    }@GetMapping("/api/issues")
+    }
+    @GetMapping("/api/issues/filtered")
     public FilterResponse readFiltedIssues(@RequestParam(name = "q", required = false) String encodedQuery) {
-        if (encodedQuery.isEmpty()) {
-
-
+        if (encodedQuery == null || encodedQuery.isEmpty()) {
+            return FilterResponse.from(issueService.readFilteredIssues("is=open"));
         }
-        return FilterResponse.from(issueService.readClosedIssues());
+        String filterCondition = UriUtils.decode(encodedQuery, "UTF-8");
+        return FilterResponse.from(issueService.readFilteredIssues(filterCondition));
     }
 
     @PatchMapping("/api/issues")

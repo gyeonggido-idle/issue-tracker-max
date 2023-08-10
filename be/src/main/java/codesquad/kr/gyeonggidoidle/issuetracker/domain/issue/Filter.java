@@ -41,7 +41,7 @@ public class Filter {
         String[] conditionWithoutBlank = filterCondition.split(" ");
 
         return Arrays.stream(conditionWithoutBlank)
-                .map(s -> s.split("="))
+                .map(s -> s.split(":"))
                 .collect(Collectors.toUnmodifiableMap(
                         splitString -> splitString[0],
                         splitString -> splitString[1]
