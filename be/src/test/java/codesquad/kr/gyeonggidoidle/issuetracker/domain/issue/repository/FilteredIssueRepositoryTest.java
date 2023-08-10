@@ -1,0 +1,53 @@
+package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository;
+
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.FilterCondition;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+
+import java.util.List;
+
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
+
+@MybatisTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class FilteredIssueRepositoryTest {
+
+    @Autowired
+    private FilteredIssueRepository repository;
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
+
+    @BeforeEach
+    void setUp() {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            session.insert("testSchema.createTables");
+            session.insert("testSchema.insertData");
+        }
+    }
+
+    @Test
+    void findFilteredIssues() {
+        //given
+        FilterCondition filterCondition = FilterCondition.builder()
+                .isOpen(true)
+                .assignee("nag")
+                .label("라벨 1")
+                .build();
+
+        //when
+        List<IssueVO> actual = repository.findByFilter(filterCondition);
+
+        //then
+        assertSoftly(assertions -> {
+           assertions.assertThat(actual).hasSize(2);
+           assertions.assertThat(actual.get(0).getId()).isEqualTo(3L);
+           assertions.assertThat(actual.get(1).getAuthor()).isEqualTo("nag");
+        });
+    }
+}
