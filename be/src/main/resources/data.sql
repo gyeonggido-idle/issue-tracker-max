@@ -4,7 +4,7 @@ values ('nag@codesquad.kr', 'nag', '1q2w3e4r!',
        ('joy@codesquad.kr', 'joy', '1q2w3e4r!',
         'https://source.boringavatars.com/beam/20/joy'),
        ('ati@codesquad.kr', 'ati', '1q2w3e4r!',
-        'https://source.boringavatars.com/beam/20/nag');
+        'https://source.boringavatars.com/beam/20/ati');
 
 INSERT INTO milestone (name, due_date, is_open)
 values ('마일스톤 1', current_date, 1),
