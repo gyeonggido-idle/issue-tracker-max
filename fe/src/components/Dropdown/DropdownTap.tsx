@@ -64,7 +64,6 @@ export const DropdownTap: React.FC<DropdownTapProps> = ({
                 filter={item.filter}
                 onClose={handleDropdownClose}
                 type={"dropdownFilter"}
-                // activeTab={activeTab}
               />
             )}
           </TabItem>
