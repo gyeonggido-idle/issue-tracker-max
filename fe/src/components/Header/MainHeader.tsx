@@ -4,7 +4,6 @@ import { Icon } from "components/Common/Icon/Icon";
 import { ProfileImg } from "components/Common/Profile/Profile";
 import logoLight from "assets/img/logo_medium.svg";
 import logoDark from "assets/img/logo_medium-dark.svg";
-import UserTestProfile from "assets/img/profile_test.svg";
 
 import { useThemeMode } from "contexts/ThemeModeContext";
 
@@ -50,9 +49,4 @@ const HeaderLayout = styled.div`
   }
 `;
 
-const ThemeModeButton = styled.button`
-  /* position: absolute;
-  bottom: 40px;
-  right: 80px;
-  z-index: 10; */
-`;
+const ThemeModeButton = styled.button``;

@@ -57,7 +57,6 @@ const OptionLists = styled.ul`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme: { color } }) => color.nuetralSurfaceStrong};
-  border-radius: ${({ theme: { radius } }) => radius.large};
 `;
 
 const OptionItem = styled.li<{ $isSelected: boolean }>`
