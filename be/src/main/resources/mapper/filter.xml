@@ -38,24 +38,4 @@
         </if>
         ORDER BY issue.id DESC
     </select>
-    <select id="test" resultType="IssueVO">
-        SELECT issue.id,
-               milestone.name AS milestone_name,
-               author.name AS author_name,
-               issue.title,
-               issue.created_at
-        FROM issue
-                 LEFT JOIN member AS author
-                           ON issue.author_id = author.id
-                 LEFT JOIN issue_assignee
-                           ON issue.id = issue_assignee.issue_id
-                 LEFT JOIN member AS assignee
-                           ON issue_assignee.assignee_id = assignee.id
-                 LEFT JOIN issue_label
-                           ON issue.id = issue_label.issue_id
-                 LEFT JOIN label
-                           ON issue_label.label_id = label.id
-                 LEFT JOIN milestone
-                           ON issue.milestone_id = milestone.id
-    </select>
 </mapper>

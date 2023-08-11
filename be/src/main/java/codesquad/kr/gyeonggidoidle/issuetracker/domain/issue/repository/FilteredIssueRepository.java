@@ -10,6 +10,4 @@ import java.util.List;
 public interface FilteredIssueRepository {
 
     public List<IssueVO> findByFilter(Filter filter);
-
-    public List<IssueVO> test();
 }

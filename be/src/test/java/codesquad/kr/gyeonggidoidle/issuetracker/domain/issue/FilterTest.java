@@ -11,7 +11,7 @@ class FilterTest {
     @Test
     void createFilterFromFilterCondition() {
         //given
-        String filterCondition = "is=open author=nag milestone=마일스톤1";
+        String filterCondition = "is:open author:nag milestone:마일스톤1";
 
         //when
         Filter actual = Filter.from(filterCondition);
@@ -29,7 +29,7 @@ class FilterTest {
     @Test
     void createIsOpenNullFilter() {
         //given
-        String filterCondition = "author=nag milestone=마일스톤1";
+        String filterCondition = "author:nag milestone:마일스톤1";
 
         //when
         Filter actual = Filter.from(filterCondition);
