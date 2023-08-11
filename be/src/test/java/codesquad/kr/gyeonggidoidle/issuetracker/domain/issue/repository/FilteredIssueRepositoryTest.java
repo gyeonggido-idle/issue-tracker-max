@@ -54,7 +54,7 @@ class FilteredIssueRepositoryTest {
         });
     }
 
-    @DisplayName("필터조건에 맞는 이슈가 없으면 ")
+    @DisplayName("필터조건에 맞는 이슈가 없으면 빈 러스트를 반환한다.")
     @Test
     void findEmptyIssues() {
         Filter filter = Filter.builder()
