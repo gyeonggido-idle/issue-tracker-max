@@ -1,14 +1,5 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.integration;
 
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.IntegrationTest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueCreateRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueStatusRequest;
@@ -17,14 +8,20 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.jwt.entity.Jwt;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.jwt.entity.JwtProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @IntegrationTest
 class IssueIntegrationTest {
@@ -45,7 +42,7 @@ class IssueIntegrationTest {
         Jwt jwt = makeToken();
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/api/issues/open")
+        ResultActions resultActions = mockMvc.perform(get("/api/issues?q=is%3Aopen")
                 .header("Authorization", "Bearer " + jwt.getAccessToken()));
 
         //then
@@ -68,7 +65,7 @@ class IssueIntegrationTest {
         Jwt jwt = makeToken();
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/api/issues/closed")
+        ResultActions resultActions = mockMvc.perform(get("/api/issues?q=is%3Aclosed")
                 .header("Authorization", "Bearer " + jwt.getAccessToken()));
 
         //then
@@ -91,7 +88,7 @@ class IssueIntegrationTest {
         Jwt jwt = makeToken();
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/api/filters")
+        ResultActions resultActions = mockMvc.perform(get("/api/filters/main")
                 .header("Authorization", "Bearer " + jwt.getAccessToken()));
 
         //then
@@ -113,7 +110,7 @@ class IssueIntegrationTest {
         Jwt jwt = makeToken();
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/api/issues")
+        ResultActions resultActions = mockMvc.perform(get("/api/filters/detail")
                 .header("Authorization", "Bearer " + jwt.getAccessToken()));
 
         //then
