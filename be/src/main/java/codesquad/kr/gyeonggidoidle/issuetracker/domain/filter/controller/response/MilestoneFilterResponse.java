@@ -1,4 +1,4 @@
-package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.response;
+package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller.response;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.MilestoneFilterInformation;
 import com.fasterxml.jackson.annotation.JsonInclude;
