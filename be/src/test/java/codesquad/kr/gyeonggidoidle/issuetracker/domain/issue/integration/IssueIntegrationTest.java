@@ -2,7 +2,7 @@ package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.integration;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.IntegrationTest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueCreateRequest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueStatusRequest;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueStatusPatchRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueUpdateRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.jwt.entity.Jwt;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.jwt.entity.JwtProvider;
@@ -132,7 +132,7 @@ class IssueIntegrationTest {
     @Test
     void testUpdateIssuesStatusIntegrationTest() throws Exception {
         // given
-        IssueStatusRequest request = IssueStatusRequest.builder()
+        IssueStatusPatchRequest request = IssueStatusPatchRequest.builder()
                 .open(false)
                 .issues(List.of(4L, 5L))
                 .build();
@@ -168,7 +168,7 @@ class IssueIntegrationTest {
     @Test
     void testUpdateIssueStatus() throws Exception {
         // given
-        IssueStatusRequest request = IssueStatusRequest.builder()
+        IssueStatusPatchRequest request = IssueStatusPatchRequest.builder()
                 .open(false)
                 .build();
         Jwt jwt = makeToken();

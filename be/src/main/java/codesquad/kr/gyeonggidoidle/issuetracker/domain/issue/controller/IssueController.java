@@ -1,7 +1,7 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueCreateRequest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueStatusRequest;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueStatusPatchRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueUpdateRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.response.ApiResponse;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.response.FilterResponse;
@@ -39,8 +39,8 @@ public class IssueController {
     }
 
     @PatchMapping
-    public ApiResponse updateIssuesStatus(@RequestBody IssueStatusRequest request) {
-        issueService.updateIssuesStatus(IssueStatusRequest.to(request));
+    public ApiResponse updateIssuesStatus(@RequestBody IssueStatusPatchRequest request) {
+        issueService.updateIssuesStatus(IssueStatusPatchRequest.to(request));
         return ApiResponse.success(HttpStatus.OK);
     }
 
@@ -51,8 +51,8 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}")
-    public ApiResponse updateIssueStatus(@PathVariable Long issueId, @RequestBody IssueStatusRequest request) {
-        issueService.updateIssuesStatus(IssueStatusRequest.to(issueId, request));
+    public ApiResponse updateIssueStatus(@PathVariable Long issueId, @RequestBody IssueStatusPatchRequest request) {
+        issueService.updateIssuesStatus(IssueStatusPatchRequest.to(issueId, request));
         return ApiResponse.success(HttpStatus.OK);
     }
 
