@@ -4,32 +4,32 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.I
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class IssueStatusRequest {
+public class IssueStatusPatchRequest {
 
     @JsonProperty("isOpen")
     private boolean open;
     private List<Long> issues;
 
     @Builder
-    private IssueStatusRequest(boolean open, List<Long> issues) {
+    private IssueStatusPatchRequest(boolean open, List<Long> issues) {
         this.open = open;
         this.issues = issues;
     }
 
-    public static IssueStatusCondition to(IssueStatusRequest request) {
+    public static IssueStatusCondition to(IssueStatusPatchRequest request) {
         return IssueStatusCondition.builder()
                 .open(request.isOpen())
                 .issueIds(request.getIssues())
                 .build();
     }
 
-    public static IssueStatusCondition to(Long issueId, IssueStatusRequest request) {
+    public static IssueStatusCondition to(Long issueId, IssueStatusPatchRequest request) {
         return IssueStatusCondition.builder()
                 .open(request.isOpen())
                 .issueIds(List.of(issueId))
