@@ -1,7 +1,7 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ControllerTest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.IssueService;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.FilterService;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,13 +25,13 @@ class FilterControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private IssueService issueService;
+    private FilterService filterService;
 
     @DisplayName("메인 화면의 필터 내용을 담은 FilterListInformation을 FilterListResponse으로 변환한다.")
     @Test
     void readFilters() throws Exception {
         //given
-        given(issueService.readFilters()).willReturn(createDummyFilterListInformation());
+        given(filterService.readFilters()).willReturn(createDummyFilterListInformation());
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/filters/main"));
@@ -52,7 +52,7 @@ class FilterControllerTest {
     @Test
     void readFiltersFromIssue() throws Exception {
         //given
-        given(issueService.readFiltersFromIssue()).willReturn(createDummyFilterListInformationByIssue());
+        given(filterService.readFiltersFromIssue()).willReturn(createDummyFilterListInformationByIssue());
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/filters/detail"));

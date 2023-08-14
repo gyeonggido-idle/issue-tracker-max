@@ -21,17 +21,17 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping
-    public FilterResponse readFiltedIssues(@RequestParam(name = "q", required = false) String encodedQuery) {
+    public FilterResponse read(@RequestParam(name = "q", required = false) String encodedQuery) {
         if (encodedQuery == null || encodedQuery.isEmpty()) {
-            return FilterResponse.from(issueService.readFilteredIssues("is:open"));
+            return FilterResponse.from(issueService.read("is:open"));
         }
         String filterCondition = UriUtils.decode(encodedQuery, "UTF-8");
-        return FilterResponse.from(issueService.readFilteredIssues(filterCondition));
+        return FilterResponse.from(issueService.read(filterCondition));
     }
 
     @PostMapping
     public ApiResponse create(@RequestBody IssueCreateRequest request, HttpServletRequest httpServletRequest) {
-        issueService.createIssue(IssueCreateRequest.to(request,
+        issueService.create(IssueCreateRequest.to(request,
                         Long.valueOf(String.valueOf(httpServletRequest.getAttribute("memberId")))
                 )
         );
