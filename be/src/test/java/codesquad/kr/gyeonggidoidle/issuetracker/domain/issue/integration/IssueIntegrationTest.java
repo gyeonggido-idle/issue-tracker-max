@@ -95,11 +95,11 @@ class IssueIntegrationTest {
         resultActions
                 .andExpect(status().isOk())
                 .andExpectAll(
-                        jsonPath("$.assignees.length()").value(4),
-                        jsonPath("$.authors.length()").value(3),
-                        jsonPath("$.labels.length()").value(4),
-                        jsonPath("$.milestones.length()").value(4),
-                        jsonPath("$.assignees.[0].name").value("담당자가 없는 이슈")
+                        jsonPath("$.assignee.length()").value(4),
+                        jsonPath("$.author.length()").value(3),
+                        jsonPath("$.label.length()").value(4),
+                        jsonPath("$.milestone.length()").value(4),
+                        jsonPath("$.assignee.[0].name").value("담당자가 없는 이슈")
                 );
     }
 
@@ -117,14 +117,14 @@ class IssueIntegrationTest {
         resultActions
                 .andExpect(status().isOk())
                 .andExpectAll(
-                        jsonPath("$.assignees.length()").value(3),
-                        jsonPath("$.authors.length()").value(0),
-                        jsonPath("$.labels.length()").value(4),
-                        jsonPath("$.milestones.length()").value(4),
-                        jsonPath("$.milestones.[0].openIssueCount").value(0),
-                        jsonPath("$.milestones.[0].closedIssueCount").value(0),
-                        jsonPath("$.milestones.[1].openIssueCount").value(1),
-                        jsonPath("$.milestones.[1].closedIssueCount").value(2)
+                        jsonPath("$.assignee.length()").value(3),
+                        jsonPath("$.author.length()").value(0),
+                        jsonPath("$.label.length()").value(4),
+                        jsonPath("$.milestone.length()").value(4),
+                        jsonPath("$.milestone.[0].openIssueCount").value(0),
+                        jsonPath("$.milestone.[0].closedIssueCount").value(0),
+                        jsonPath("$.milestone.[1].openIssueCount").value(1),
+                        jsonPath("$.milestone.[1].closedIssueCount").value(2)
                 );
     }
 
