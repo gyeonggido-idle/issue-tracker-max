@@ -29,25 +29,25 @@ public class IssueService {
 
     private final StatRepository statRepository;
     private final IssueRepository issueRepository;
+    private final IssueSearchRepository issueSearchRepository;
     private final LabelRepository labelRepository;
     private final MemberRepository memberRepository;
     private final CommentRepository commentRepository;
-    private final IssueSearchRepository issueSearchRepository;
 
-    public SearchInformation read(String filterCondition) {
+    public SearchInformation findIssuesBySearchFilter(String searchFilterCondition) {
         StatVO statVO = statRepository.countOverallStats();
-        SearchFilter searchFilter = SearchFilter.from(filterCondition);
-        List<IssueSearchResult> issueSearchResults = issueSearchRepository.findByFilter(searchFilter);
+        SearchFilter searchFilter = SearchFilter.from(searchFilterCondition);
+        List<IssueSearchResult> issueSearchResults = issueSearchRepository.findIssuesBySearchFilter(searchFilter);
         List<Long> issueIds = getIssueIds(issueSearchResults);
         Map<Long, List<LabelVO>> labelVOs = labelRepository.findAllByIssueIds(issueIds);
         Map<Long, List<String>> assigneeProfiles = memberRepository.findAllProfilesByIssueIds(issueIds);
 
-        return SearchInformation.from(statVO, issueSearchResults, labelVOs, assigneeProfiles, filterCondition);
+        return SearchInformation.from(statVO, issueSearchResults, labelVOs, assigneeProfiles, searchFilterCondition);
     }
 
-    public void create(IssueCreateCondition condition) {
+    public void createIssue(IssueCreateCondition condition) {
         Issue issue = IssueCreateCondition.toIssue(condition);
-        Long createdId = issueRepository.createIssue(issue);
+        Long createdId = issueRepository.saveIssue(issue);
         Comment comment = IssueCreateCondition.toComment(createdId, condition);
         Long fileId = null;
         if (comment.isFileExist()) {

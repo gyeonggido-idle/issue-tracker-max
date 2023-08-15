@@ -20,24 +20,7 @@ public class IssueRepository {
 
     private final NamedParameterJdbcTemplate template;
 
-    private final RowMapper<IssueSearchResult> issueVOMapper = (rs, rowNum) -> IssueSearchResult.builder()
-            .id(rs.getLong("id"))
-            .author(rs.getString("author_name"))
-            .milestone(rs.getString("milestone_name"))
-            .title(rs.getString("title"))
-            .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
-            .build();
-
-    public void updateIssuesStatus(IssueStatusResult vo) {
-        String sql = "UPDATE issue SET is_open = :is_open WHERE id IN (:issueIds)";
-
-        MapSqlParameterSource params = new MapSqlParameterSource()
-                .addValue("is_open", vo.isOpen())
-                .addValue("issueIds", vo.getIssueIds());
-        template.update(sql, params);
-    }
-
-    public Long createIssue(Issue issue) {
+    public Long saveIssue(Issue issue) {
         String sql = "INSERT INTO issue (author_id, milestone_id, title) VALUES (:author_id, :milestone_id, :title)";
 
         MapSqlParameterSource params = new MapSqlParameterSource()
@@ -47,11 +30,6 @@ public class IssueRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(sql, params, keyHolder, new String[]{"id"});
         return keyHolder.getKey().longValue();
-    }
-
-    public void deleteIssue(Long issueId) {
-        String sql = "UPDATE issue SET is_deleted = TRUE WHERE id = :issueId";
-        template.update(sql, Map.of("issueId", issueId));
     }
 
     public void updateIssue(IssueUpdateResult vo) {
@@ -64,4 +42,26 @@ public class IssueRepository {
                 .addValue("issueId", vo.getIssueId());
         template.update(sql, params);
     }
+
+    public void updateIssuesStatus(IssueStatusResult vo) {
+        String sql = "UPDATE issue SET is_open = :is_open WHERE id IN (:issueIds)";
+
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("is_open", vo.isOpen())
+                .addValue("issueIds", vo.getIssueIds());
+        template.update(sql, params);
+    }
+
+    public void deleteIssue(Long issueId) {
+        String sql = "UPDATE issue SET is_deleted = TRUE WHERE id = :issueId";
+        template.update(sql, Map.of("issueId", issueId));
+    }
+
+    private final RowMapper<IssueSearchResult> issueSearchResultRowMapper = (rs, rowNum) -> IssueSearchResult.builder()
+            .id(rs.getLong("id"))
+            .author(rs.getString("author_name"))
+            .milestone(rs.getString("milestone_name"))
+            .title(rs.getString("title"))
+            .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
+            .build();
 }
