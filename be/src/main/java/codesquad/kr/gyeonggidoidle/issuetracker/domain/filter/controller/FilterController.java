@@ -1,7 +1,7 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller.response.FilterListResponse;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.FilterService;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.FilterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
