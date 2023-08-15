@@ -1,6 +1,6 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller;
 
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller.response.FilterListResponse;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller.response.FilterResponse;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.FilterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +15,12 @@ public class FilterController {
     private final FilterService filterService;
 
     @GetMapping("/main")
-    public FilterListResponse readFilters() {
-        return FilterListResponse.from(filterService.readFilters());
+    public FilterResponse readFilters() {
+        return FilterResponse.from(filterService.readFilters());
     }
 
     @GetMapping("/detail")
-    public FilterListResponse readFiltersFromIssue() {
-        return FilterListResponse.from(filterService.readFiltersFromIssue());
+    public FilterResponse readFiltersFromIssue() {
+        return FilterResponse.from(filterService.readFiltersFromIssue());
     }
 }

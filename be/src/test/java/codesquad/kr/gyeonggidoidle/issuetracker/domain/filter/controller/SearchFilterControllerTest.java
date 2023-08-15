@@ -68,8 +68,8 @@ class SearchFilterControllerTest {
                 );
     }
 
-    private FilterListInformation createDummyFilterListInformation() {
-        return FilterListInformation.builder()
+    private FilterInformation createDummyFilterListInformation() {
+        return FilterInformation.builder()
                 .assigneeFilterInformations(createDummyAssigneeFilterInformations())
                 .authorFilterInformations(createDummyAuthorFilterInformations())
                 .labelFilterInformations(createDummyLabelFilterInformations())
@@ -77,8 +77,8 @@ class SearchFilterControllerTest {
                 .build();
     }
 
-    private FilterListInformation createDummyFilterListInformationByIssue() {
-        return FilterListInformation.builder()
+    private FilterInformation createDummyFilterListInformationByIssue() {
+        return FilterInformation.builder()
                 .assigneeFilterInformations(createDummyAssigneeFilterInformations())
                 .authorFilterInformations(Collections.emptyList())
                 .labelFilterInformations(createDummyLabelFilterInformations())

@@ -1,7 +1,7 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ServiceTest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.information.FilterListInformation;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.information.FilterInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.LabelRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.VO.LabelDetailsVO;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.member.repository.MemberRepository;
@@ -46,7 +46,7 @@ class SearchFilterServiceTest {
         given(milestoneRepository.findAllFilters()).willReturn(createDummyMilestoneDetailVOs());
 
         //when
-        FilterListInformation actual = filterService.readFilters();
+        FilterInformation actual = filterService.readFilters();
 
         //then
         assertSoftly(assertions -> {
@@ -71,7 +71,7 @@ class SearchFilterServiceTest {
         given(statRepository.findIssuesCountByMilestoneIds(any())).willReturn(createDummyIssueByMilestoneVOs());
 
         //when
-        FilterListInformation actual = filterService.readFiltersFromIssue();
+        FilterInformation actual = filterService.readFiltersFromIssue();
 
         //then
         assertSoftly(assertions -> {
