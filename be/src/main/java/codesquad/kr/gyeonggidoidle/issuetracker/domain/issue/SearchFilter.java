@@ -1,5 +1,6 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue;
 
+import codesquad.kr.gyeonggidoidle.issuetracker.exception.ParsingFilterConditionException;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,6 +10,8 @@ import java.util.stream.Collectors;
 
 @Getter
 public class SearchFilter {
+
+    private final static SearchFilter NULL_SEARCH_FILTER = SearchFilter.builder().build();
 
     private final Boolean isOpen;
     private final String assignee;
@@ -26,26 +29,34 @@ public class SearchFilter {
     }
 
     public static SearchFilter from(String filterCondition) {
-        Map<String, String> parsedFilterCondition = parseFilterCondition(filterCondition);
+        try {
+            Map<String, String> parsedFilterCondition = parseFilterCondition(filterCondition);
 
-        return SearchFilter.builder()
-                .isOpen(checkOpen(parsedFilterCondition.get("is")))
-                .assignee(parsedFilterCondition.get("assignee"))
-                .label(parsedFilterCondition.get("label"))
-                .milestone(parsedFilterCondition.get("milestone"))
-                .author(parsedFilterCondition.get("author"))
-                .build();
+            return SearchFilter.builder()
+                    .isOpen(checkOpen(parsedFilterCondition.get("is")))
+                    .assignee(parsedFilterCondition.get("assignee"))
+                    .label(parsedFilterCondition.get("label"))
+                    .milestone(parsedFilterCondition.get("milestone"))
+                    .author(parsedFilterCondition.get("author"))
+                    .build();
+        } catch (ParsingFilterConditionException e) {
+            return NULL_SEARCH_FILTER;
+        }
     }
 
     private static Map<String, String> parseFilterCondition(String filterCondition) {
-        String[] conditionWithoutBlank = filterCondition.split(" ");
+        try {
+            String[] conditionWithoutBlank = filterCondition.split(" ");
 
-        return Arrays.stream(conditionWithoutBlank)
-                .map(s -> s.split(":"))
-                .collect(Collectors.toUnmodifiableMap(
-                        splitString -> splitString[0],
-                        splitString -> splitString[1]
-                ));
+            return Arrays.stream(conditionWithoutBlank)
+                    .map(s -> s.split(":"))
+                    .collect(Collectors.toUnmodifiableMap(
+                            splitString -> splitString[0],
+                            splitString -> splitString[1]
+                    ));
+        } catch (RuntimeException e) {
+            throw new ParsingFilterConditionException();
+        }
     }
 
     private static Boolean checkOpen(String value) {
