@@ -1,8 +1,7 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ServiceTest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.FilterService;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.FilterListInformation;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.information.FilterListInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.LabelRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.VO.LabelDetailsVO;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.member.repository.MemberRepository;

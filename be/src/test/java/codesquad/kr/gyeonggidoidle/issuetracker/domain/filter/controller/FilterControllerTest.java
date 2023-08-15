@@ -1,8 +1,8 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ControllerTest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.FilterService;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.*;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.FilterService;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.information.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
