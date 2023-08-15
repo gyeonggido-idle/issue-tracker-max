@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ControllerTest(FilterController.class)
-class FilterControllerTest {
+class SearchFilterControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

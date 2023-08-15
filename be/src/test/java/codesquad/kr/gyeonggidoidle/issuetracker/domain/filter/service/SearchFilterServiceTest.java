@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @ServiceTest
-class FilterServiceTest {
+class SearchFilterServiceTest {
 
     @InjectMocks
     private FilterService filterService;
