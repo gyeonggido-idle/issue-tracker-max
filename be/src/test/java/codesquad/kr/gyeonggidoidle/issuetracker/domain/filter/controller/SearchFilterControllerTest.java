@@ -40,11 +40,11 @@ class SearchFilterControllerTest {
         resultActions
                 .andExpect(status().isOk())
                 .andExpectAll(
-                        jsonPath("$.assignees.length()").value(3),
-                        jsonPath("$.authors.length()").value(2),
-                        jsonPath("$.authors.[0].name").value("a"),
-                        jsonPath("$.labels.length()").value(1),
-                        jsonPath("$.milestones.length()").value(0)
+                        jsonPath("$.assignee.length()").value(3),
+                        jsonPath("$.author.length()").value(2),
+                        jsonPath("$.author.[0].name").value("a"),
+                        jsonPath("$.label.length()").value(1),
+                        jsonPath("$.milestone.length()").value(0)
                 );
     }
 
@@ -61,10 +61,10 @@ class SearchFilterControllerTest {
         resultActions
                 .andExpect(status().isOk())
                 .andExpectAll(
-                        jsonPath("$.assignees.length()").value(3),
-                        jsonPath("$.authors.length()").value(0),
-                        jsonPath("$.labels.length()").value(1),
-                        jsonPath("$.milestones.length()").value(0)
+                        jsonPath("$.assignee.length()").value(3),
+                        jsonPath("$.author.length()").value(0),
+                        jsonPath("$.label.length()").value(1),
+                        jsonPath("$.milestone.length()").value(0)
                 );
     }
 
