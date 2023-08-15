@@ -43,12 +43,12 @@ class IssueServiceTest {
     void transformOpenIssuesVO() {
         //given
         given(statRepository.countOverallStats()).willReturn(createDummyStatVO());
-        given(issueSearchRepository.findByFilter(any())).willReturn(createDummyOpenIssueVOs());
+        given(issueSearchRepository.findIssuesBySearchFilter(any())).willReturn(createDummyOpenIssueVOs());
         given(labelRepository.findAllByIssueIds(any())).willReturn(createDummyLabelVOs());
         given(memberRepository.findAllProfilesByIssueIds(any())).willReturn(createDummyAssigneeProfiles());
 
         //when
-        SearchInformation actual = issueService.read("is:open");
+        SearchInformation actual = issueService.findIssuesBySearchFilter("is:open");
 
         //then
         assertSoftly(assertions -> {
@@ -72,12 +72,12 @@ class IssueServiceTest {
     void transformClosedIssuesVO() {
         //given
         given(statRepository.countOverallStats()).willReturn(createDummyStatVO());
-        given(issueSearchRepository.findByFilter(any())).willReturn((createDummyClosedIssueVOs()));
+        given(issueSearchRepository.findIssuesBySearchFilter(any())).willReturn((createDummyClosedIssueVOs()));
         given(labelRepository.findAllByIssueIds(any())).willReturn(createDummyLabelVOs());
         given(memberRepository.findAllProfilesByIssueIds(any())).willReturn(createDummyAssigneeProfiles());
 
         //when
-        SearchInformation actual = issueService.read("is:closed");
+        SearchInformation actual = issueService.findIssuesBySearchFilter("is:closed");
 
         //then
         assertSoftly(assertions -> {

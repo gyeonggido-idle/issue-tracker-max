@@ -35,7 +35,7 @@ class IssueControllerTest {
     @Test
     void readOpenIssues() throws Exception {
         //given
-        given(issueService.read(anyString())).willReturn(createDummyFilterInformation());
+        given(issueService.findIssuesBySearchFilter(anyString())).willReturn(createDummyFilterInformation());
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/issues?q=is%3Aopen"));
@@ -56,7 +56,7 @@ class IssueControllerTest {
     @Test
     void readClosedIssues() throws Exception {
         //given
-        given(issueService.read(anyString())).willReturn(createDummyFilterInformation());
+        given(issueService.findIssuesBySearchFilter(anyString())).willReturn(createDummyFilterInformation());
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/issues?q=is%3Aclosed"));

@@ -21,17 +21,17 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping
-    public SearchResponse read(@RequestParam(name = "q", required = false) String encodedQuery) {
+    public SearchResponse findIssuesBySearchFilter(@RequestParam(name = "q", required = false) String encodedQuery) {
         if (encodedQuery == null || encodedQuery.isEmpty()) {
-            return SearchResponse.from(issueService.read("is:open"));
+            return SearchResponse.from(issueService.findIssuesBySearchFilter("is:open"));
         }
         String filterCondition = UriUtils.decode(encodedQuery, "UTF-8");
-        return SearchResponse.from(issueService.read(filterCondition));
+        return SearchResponse.from(issueService.findIssuesBySearchFilter(filterCondition));
     }
 
     @PostMapping
-    public ApiResponse create(@RequestBody IssueCreateRequest request, HttpServletRequest httpServletRequest) {
-        issueService.create(IssueCreateRequest.to(request,
+    public ApiResponse createIssue(@RequestBody IssueCreateRequest request, HttpServletRequest httpServletRequest) {
+        issueService.createIssue(IssueCreateRequest.to(request,
                         Long.valueOf(String.valueOf(httpServletRequest.getAttribute("memberId")))
                 )
         );
@@ -57,7 +57,7 @@ public class IssueController {
     }
 
     @DeleteMapping("/{issueId}")
-    public ApiResponse delete(@PathVariable Long issueId) {
+    public ApiResponse deleteIssue(@PathVariable Long issueId) {
         issueService.deleteIssue(issueId);
         return ApiResponse.success(HttpStatus.OK);
     }

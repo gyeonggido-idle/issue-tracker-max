@@ -33,7 +33,7 @@ class IssueSearchRepositoryTest {
                 .build();
 
         //when
-        List<IssueSearchResult> actual = repository.findByFilter(searchFilter);
+        List<IssueSearchResult> actual = repository.findIssuesBySearchFilter(searchFilter);
 
         //then
         assertSoftly(assertions -> {
@@ -54,7 +54,7 @@ class IssueSearchRepositoryTest {
                 .build();
 
         //when
-        List<IssueSearchResult> actual = repository.findByFilter(searchFilter);
+        List<IssueSearchResult> actual = repository.findIssuesBySearchFilter(searchFilter);
 
         //then
         assertThat(actual).isEmpty();
@@ -71,7 +71,7 @@ class IssueSearchRepositoryTest {
                 .build();
 
         //when
-        List<IssueSearchResult> actual = repository.findByFilter(searchFilter);
+        List<IssueSearchResult> actual = repository.findIssuesBySearchFilter(searchFilter);
 
         //then
         assertThat(actual).isEmpty();
