@@ -1,9 +1,9 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.Issue;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueStatusVO;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueUpdateVO;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.result.IssueStatusResult;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.result.IssueUpdateResult;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.result.IssueSearchResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -20,7 +20,7 @@ public class IssueRepository {
 
     private final NamedParameterJdbcTemplate template;
 
-    private final RowMapper<IssueVO> issueVOMapper = (rs, rowNum) -> IssueVO.builder()
+    private final RowMapper<IssueSearchResult> issueVOMapper = (rs, rowNum) -> IssueSearchResult.builder()
             .id(rs.getLong("id"))
             .author(rs.getString("author_name"))
             .milestone(rs.getString("milestone_name"))
@@ -28,7 +28,7 @@ public class IssueRepository {
             .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
             .build();
 
-    public void updateIssuesStatus(IssueStatusVO vo) {
+    public void updateIssuesStatus(IssueStatusResult vo) {
         String sql = "UPDATE issue SET is_open = :is_open WHERE id IN (:issueIds)";
 
         MapSqlParameterSource params = new MapSqlParameterSource()
@@ -54,7 +54,7 @@ public class IssueRepository {
         template.update(sql, Map.of("issueId", issueId));
     }
 
-    public void updateIssue(IssueUpdateVO vo) {
+    public void updateIssue(IssueUpdateResult vo) {
         String sql = "UPDATE issue SET title = :title, milestone_id = :milestone_id " +
                 "WHERE id = :issueId";
 

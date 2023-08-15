@@ -1,6 +1,6 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request;
 
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.IssueStatusCondition;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.IssueStatusPatchCondition;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,15 +22,15 @@ public class IssueStatusPatchRequest {
         this.issues = issues;
     }
 
-    public static IssueStatusCondition to(IssueStatusPatchRequest request) {
-        return IssueStatusCondition.builder()
+    public static IssueStatusPatchCondition to(IssueStatusPatchRequest request) {
+        return IssueStatusPatchCondition.builder()
                 .open(request.isOpen())
                 .issueIds(request.getIssues())
                 .build();
     }
 
-    public static IssueStatusCondition to(Long issueId, IssueStatusPatchRequest request) {
-        return IssueStatusCondition.builder()
+    public static IssueStatusPatchCondition to(Long issueId, IssueStatusPatchRequest request) {
+        return IssueStatusPatchCondition.builder()
                 .open(request.isOpen())
                 .issueIds(List.of(issueId))
                 .build();

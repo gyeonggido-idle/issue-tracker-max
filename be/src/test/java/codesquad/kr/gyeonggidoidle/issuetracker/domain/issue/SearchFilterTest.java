@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
-class FilterTest {
+class SearchFilterTest {
 
     @DisplayName("FilterCondition에서 Filter가 만들어진다.")
     @Test
@@ -14,7 +14,7 @@ class FilterTest {
         String filterCondition = "is:open author:nag milestone:마일스톤1";
 
         //when
-        Filter actual = Filter.from(filterCondition);
+        SearchFilter actual = SearchFilter.from(filterCondition);
 
         //then
         assertSoftly(assertions -> {
@@ -32,7 +32,7 @@ class FilterTest {
         String filterCondition = "author:nag milestone:마일스톤1";
 
         //when
-        Filter actual = Filter.from(filterCondition);
+        SearchFilter actual = SearchFilter.from(filterCondition);
 
         //then
         assertSoftly(assertions -> {

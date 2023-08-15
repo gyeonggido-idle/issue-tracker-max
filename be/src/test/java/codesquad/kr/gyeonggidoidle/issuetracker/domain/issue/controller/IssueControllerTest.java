@@ -2,7 +2,7 @@ package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ControllerTest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.IssueService;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.FilterInformation;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.SearchInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.IssueInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.service.information.LabelInformation;
 import org.junit.jupiter.api.DisplayName;
@@ -73,8 +73,8 @@ class IssueControllerTest {
                 );
     }
 
-    private FilterInformation createDummyFilterInformation() {
-        return FilterInformation.builder()
+    private SearchInformation createDummyFilterInformation() {
+        return SearchInformation.builder()
                 .openIssueCount(3)
                 .closedIssueCount(3)
                 .milestoneCount(2)

@@ -1,9 +1,9 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service;
 
 import codesquad.kr.gyeonggidoidle.issuetracker.annotation.ServiceTest;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.FilteredIssueRepository;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.vo.IssueVO;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.FilterInformation;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.IssueSearchRepository;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.result.IssueSearchResult;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.information.SearchInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.LabelRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.VO.LabelVO;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.member.repository.MemberRepository;
@@ -36,19 +36,19 @@ class IssueServiceTest {
     @Mock
     private MemberRepository memberRepository;
     @Mock
-    private FilteredIssueRepository filteredIssueRepository;
+    private IssueSearchRepository issueSearchRepository;
 
     @DisplayName("레포지토리에서 열린 이슈 관련 정보들을 받고 FilterInformation으로 변환할 수 있다.")
     @Test
     void transformOpenIssuesVO() {
         //given
         given(statRepository.countOverallStats()).willReturn(createDummyStatVO());
-        given(filteredIssueRepository.findByFilter(any())).willReturn(createDummyOpenIssueVOs());
+        given(issueSearchRepository.findByFilter(any())).willReturn(createDummyOpenIssueVOs());
         given(labelRepository.findAllByIssueIds(any())).willReturn(createDummyLabelVOs());
         given(memberRepository.findAllProfilesByIssueIds(any())).willReturn(createDummyAssigneeProfiles());
 
         //when
-        FilterInformation actual = issueService.read("is:open");
+        SearchInformation actual = issueService.read("is:open");
 
         //then
         assertSoftly(assertions -> {
@@ -72,12 +72,12 @@ class IssueServiceTest {
     void transformClosedIssuesVO() {
         //given
         given(statRepository.countOverallStats()).willReturn(createDummyStatVO());
-        given(filteredIssueRepository.findByFilter(any())).willReturn((createDummyClosedIssueVOs()));
+        given(issueSearchRepository.findByFilter(any())).willReturn((createDummyClosedIssueVOs()));
         given(labelRepository.findAllByIssueIds(any())).willReturn(createDummyLabelVOs());
         given(memberRepository.findAllProfilesByIssueIds(any())).willReturn(createDummyAssigneeProfiles());
 
         //when
-        FilterInformation actual = issueService.read("is:closed");
+        SearchInformation actual = issueService.read("is:closed");
 
         //then
         assertSoftly(assertions -> {
@@ -103,36 +103,36 @@ class IssueServiceTest {
                 .build();
     }
 
-    private List<IssueVO> createDummyOpenIssueVOs() {
-        IssueVO issueVO1 = IssueVO.builder()
+    private List<IssueSearchResult> createDummyOpenIssueVOs() {
+        IssueSearchResult issueSearchResult1 = IssueSearchResult.builder()
                 .id(1L)
                 .author("작성자 1")
                 .milestone("마일스톤 1")
                 .title("제목 1")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO2 = IssueVO.builder()
+        IssueSearchResult issueSearchResult2 = IssueSearchResult.builder()
                 .id(2L)
                 .author("작성자 2")
                 .milestone("마일스톤 2")
                 .title("제목 2")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO3 = IssueVO.builder()
+        IssueSearchResult issueSearchResult3 = IssueSearchResult.builder()
                 .id(3L)
                 .author("작성자 1")
                 .milestone("마일스톤 2")
                 .title("제목 3")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO4 = IssueVO.builder()
+        IssueSearchResult issueSearchResult4 = IssueSearchResult.builder()
                 .id(4L)
                 .author("작성자 1")
                 .milestone("마일스톤 2")
                 .title("제목 4")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO5 = IssueVO.builder()
+        IssueSearchResult issueSearchResult5 = IssueSearchResult.builder()
                 .id(5L)
                 .author("작성자 2")
                 .milestone("마일스톤 1")
@@ -140,39 +140,39 @@ class IssueServiceTest {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        return List.of(issueVO1, issueVO2, issueVO3, issueVO4, issueVO5);
+        return List.of(issueSearchResult1, issueSearchResult2, issueSearchResult3, issueSearchResult4, issueSearchResult5);
     }
 
-    private List<IssueVO> createDummyClosedIssueVOs() {
-        IssueVO issueVO1 = IssueVO.builder()
+    private List<IssueSearchResult> createDummyClosedIssueVOs() {
+        IssueSearchResult issueSearchResult1 = IssueSearchResult.builder()
                 .id(1L)
                 .author("작성자 1")
                 .milestone("마일스톤 1")
                 .title("제목 1")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO2 = IssueVO.builder()
+        IssueSearchResult issueSearchResult2 = IssueSearchResult.builder()
                 .id(2L)
                 .author("작성자 2")
                 .milestone("마일스톤 2")
                 .title("제목 2")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO3 = IssueVO.builder()
+        IssueSearchResult issueSearchResult3 = IssueSearchResult.builder()
                 .id(3L)
                 .author("작성자 1")
                 .milestone("마일스톤 2")
                 .title("제목 3")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO4 = IssueVO.builder()
+        IssueSearchResult issueSearchResult4 = IssueSearchResult.builder()
                 .id(4L)
                 .author("작성자 1")
                 .milestone("마일스톤 2")
                 .title("제목 4")
                 .createdAt(LocalDateTime.now())
                 .build();
-        IssueVO issueVO5 = IssueVO.builder()
+        IssueSearchResult issueSearchResult5 = IssueSearchResult.builder()
                 .id(5L)
                 .author("작성자 2")
                 .milestone("마일스톤 1")
@@ -180,7 +180,7 @@ class IssueServiceTest {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        return List.of(issueVO1, issueVO2, issueVO3, issueVO4, issueVO5);
+        return List.of(issueSearchResult1, issueSearchResult2, issueSearchResult3, issueSearchResult4, issueSearchResult5);
     }
 
     private Map<Long, List<LabelVO>> createDummyLabelVOs() {

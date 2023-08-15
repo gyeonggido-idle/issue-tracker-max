@@ -4,7 +4,7 @@ import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueStatusPatchRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.request.IssueUpdateRequest;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.response.ApiResponse;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.response.FilterResponse;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.controller.response.SearchResponse;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,12 +21,12 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping
-    public FilterResponse read(@RequestParam(name = "q", required = false) String encodedQuery) {
+    public SearchResponse read(@RequestParam(name = "q", required = false) String encodedQuery) {
         if (encodedQuery == null || encodedQuery.isEmpty()) {
-            return FilterResponse.from(issueService.read("is:open"));
+            return SearchResponse.from(issueService.read("is:open"));
         }
         String filterCondition = UriUtils.decode(encodedQuery, "UTF-8");
-        return FilterResponse.from(issueService.read(filterCondition));
+        return SearchResponse.from(issueService.read(filterCondition));
     }
 
     @PostMapping

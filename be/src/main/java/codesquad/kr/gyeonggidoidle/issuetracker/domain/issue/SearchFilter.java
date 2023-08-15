@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Getter
-public class Filter {
+public class SearchFilter {
 
     private final Boolean isOpen;
     private final String assignee;
@@ -17,7 +17,7 @@ public class Filter {
     private final String author;
 
     @Builder
-    private Filter(Boolean isOpen, String assignee, String label, String milestone, String author) {
+    private SearchFilter(Boolean isOpen, String assignee, String label, String milestone, String author) {
         this.isOpen = isOpen;
         this.assignee = assignee;
         this.label = label;
@@ -25,10 +25,10 @@ public class Filter {
         this.author = author;
     }
 
-    public static Filter from(String filterCondition) {
+    public static SearchFilter from(String filterCondition) {
         Map<String, String> parsedFilterCondition = parseFilterCondition(filterCondition);
 
-        return Filter.builder()
+        return SearchFilter.builder()
                 .isOpen(checkOpen(parsedFilterCondition.get("is")))
                 .assignee(parsedFilterCondition.get("assignee"))
                 .label(parsedFilterCondition.get("label"))
