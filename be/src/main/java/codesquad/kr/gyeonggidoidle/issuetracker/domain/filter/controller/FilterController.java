@@ -15,12 +15,12 @@ public class FilterController {
     private final FilterService filterService;
 
     @GetMapping("/main")
-    public FilterResponse readFilters() {
-        return FilterResponse.from(filterService.readFilters());
+    public FilterResponse getMainFilter() {
+        return FilterResponse.from(filterService.getMainFilter());
     }
 
     @GetMapping("/detail")
-    public FilterResponse readFiltersFromIssue() {
-        return FilterResponse.from(filterService.readFiltersFromIssue());
+    public FilterResponse getDetailFilter() {
+        return FilterResponse.from(filterService.getDetailFilter());
     }
 }

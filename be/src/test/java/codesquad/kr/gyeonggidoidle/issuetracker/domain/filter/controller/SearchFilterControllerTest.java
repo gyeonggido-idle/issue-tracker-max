@@ -31,7 +31,7 @@ class SearchFilterControllerTest {
     @Test
     void readFilters() throws Exception {
         //given
-        given(filterService.readFilters()).willReturn(createDummyFilterListInformation());
+        given(filterService.getMainFilter()).willReturn(createDummyFilterListInformation());
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/filters/main"));
@@ -52,7 +52,7 @@ class SearchFilterControllerTest {
     @Test
     void readFiltersFromIssue() throws Exception {
         //given
-        given(filterService.readFiltersFromIssue()).willReturn(createDummyFilterListInformationByIssue());
+        given(filterService.getDetailFilter()).willReturn(createDummyFilterListInformationByIssue());
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/api/filters/detail"));

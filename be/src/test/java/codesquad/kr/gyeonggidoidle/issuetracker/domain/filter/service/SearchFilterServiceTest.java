@@ -41,12 +41,12 @@ class SearchFilterServiceTest {
     @Test
     void transformFilterVO() {
         //given
-        given(memberRepository.findAllFilters()).willReturn(createDummyMemberDetailsVOs());
-        given(labelRepository.findAllFilters()).willReturn(createDummyLabelDetailsVOs());
-        given(milestoneRepository.findAllFilters()).willReturn(createDummyMilestoneDetailVOs());
+        given(memberRepository.getMemberFilter()).willReturn(createDummyMemberDetailsVOs());
+        given(labelRepository.getLabelFilter()).willReturn(createDummyLabelDetailsVOs());
+        given(milestoneRepository.getMilestoneFilter()).willReturn(createDummyMilestoneDetailVOs());
 
         //when
-        FilterInformation actual = filterService.readFilters();
+        FilterInformation actual = filterService.getMainFilter();
 
         //then
         assertSoftly(assertions -> {
@@ -65,13 +65,13 @@ class SearchFilterServiceTest {
     @Test
     void transformFiltersFromIssue() {
         //given
-        given(memberRepository.findAllFilters()).willReturn(createDummyMemberDetailsVOs());
-        given(labelRepository.findAllFilters()).willReturn(createDummyLabelDetailsVOs());
-        given(milestoneRepository.findAllFilters()).willReturn(createDummyMilestoneDetailVOs());
-        given(statRepository.findIssuesCountByMilestoneIds(any())).willReturn(createDummyIssueByMilestoneVOs());
+        given(memberRepository.getMemberFilter()).willReturn(createDummyMemberDetailsVOs());
+        given(labelRepository.getLabelFilter()).willReturn(createDummyLabelDetailsVOs());
+        given(milestoneRepository.getMilestoneFilter()).willReturn(createDummyMilestoneDetailVOs());
+        given(statRepository.countIssuesByMilestoneIds(any())).willReturn(createDummyIssueByMilestoneVOs());
 
         //when
-        FilterInformation actual = filterService.readFiltersFromIssue();
+        FilterInformation actual = filterService.getDetailFilter();
 
         //then
         assertSoftly(assertions -> {

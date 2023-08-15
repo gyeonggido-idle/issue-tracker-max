@@ -25,21 +25,22 @@ public class FilterService {
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
 
-    public FilterInformation readFilters() {
-        List<MemberDetailsVO> members = memberRepository.findAllFilters();
-        List<LabelDetailsVO> labels = labelRepository.findAllFilters();
-        List<MilestoneDetailsVO> milestones = milestoneRepository.findAllFilters();
+    public FilterInformation getMainFilter() {
+        List<MemberDetailsVO> memberFilter = memberRepository.getMemberFilter();
+        List<LabelDetailsVO> labelFilter = labelRepository.getLabelFilter();
+        List<MilestoneDetailsVO> milestoneFilter = milestoneRepository.getMilestoneFilter();
 
-        return FilterInformation.from(members, members, labels, milestones);
+        return FilterInformation.from(memberFilter, memberFilter, labelFilter, milestoneFilter);
     }
 
-    public FilterInformation readFiltersFromIssue() {
-        List<MemberDetailsVO> members = memberRepository.findAllFilters();
-        List<LabelDetailsVO> labels = labelRepository.findAllFilters();
-        List<MilestoneDetailsVO> milestones = milestoneRepository.findAllFilters();
+    public FilterInformation getDetailFilter() {
+        List<MemberDetailsVO> members = memberRepository.getMemberFilter();
+        List<LabelDetailsVO> labels = labelRepository.getLabelFilter();
+        List<MilestoneDetailsVO> milestones = milestoneRepository.getMilestoneFilter();
         List<Long> milestoneIds = getMilestoneIds(milestones);
-        Map<Long, IssueByMilestoneVO> issuesCountByMilestoneIds = statRepository.findIssuesCountByMilestoneIds(
+        Map<Long, IssueByMilestoneVO> issuesCountByMilestoneIds = statRepository.countIssuesByMilestoneIds(
                 milestoneIds);
+
         return FilterInformation.from(members, labels, milestones, issuesCountByMilestoneIds);
     }
 
