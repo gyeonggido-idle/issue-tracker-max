@@ -3,6 +3,7 @@ package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.controller.respon
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.information.FilterInformation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,10 +12,14 @@ import java.util.List;
 @Getter
 public class FilterResponse {
 
+    @JsonProperty("assignee")
     private final List<AssigneeFilterResponse> assignees;
     @JsonInclude(Include.NON_NULL)
+    @JsonProperty("author")
     private final List<AuthorFilterResponse> authors;
+    @JsonProperty("label")
     private final List<LabelFilterResponse> labels;
+    @JsonProperty("milestone")
     private final List<MilestoneFilterResponse> milestones;
 
     @Builder
