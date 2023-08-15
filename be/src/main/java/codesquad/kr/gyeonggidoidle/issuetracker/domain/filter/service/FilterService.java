@@ -1,6 +1,6 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service;
 
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.information.FilterListInformation;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.filter.service.information.FilterInformation;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.LabelRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.label.repository.VO.LabelDetailsVO;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.member.repository.MemberRepository;
@@ -25,22 +25,22 @@ public class FilterService {
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
 
-    public FilterListInformation readFilters() {
+    public FilterInformation readFilters() {
         List<MemberDetailsVO> members = memberRepository.findAllFilters();
         List<LabelDetailsVO> labels = labelRepository.findAllFilters();
         List<MilestoneDetailsVO> milestones = milestoneRepository.findAllFilters();
 
-        return FilterListInformation.from(members, members, labels, milestones);
+        return FilterInformation.from(members, members, labels, milestones);
     }
 
-    public FilterListInformation readFiltersFromIssue() {
+    public FilterInformation readFiltersFromIssue() {
         List<MemberDetailsVO> members = memberRepository.findAllFilters();
         List<LabelDetailsVO> labels = labelRepository.findAllFilters();
         List<MilestoneDetailsVO> milestones = milestoneRepository.findAllFilters();
         List<Long> milestoneIds = getMilestoneIds(milestones);
         Map<Long, IssueByMilestoneVO> issuesCountByMilestoneIds = statRepository.findIssuesCountByMilestoneIds(
                 milestoneIds);
-        return FilterListInformation.from(members, labels, milestones, issuesCountByMilestoneIds);
+        return FilterInformation.from(members, labels, milestones, issuesCountByMilestoneIds);
     }
 
     private List<Long> getMilestoneIds(List<MilestoneDetailsVO> milestoneDetailsVOs) {
