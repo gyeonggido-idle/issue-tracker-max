@@ -43,7 +43,7 @@ class IssueServiceTest {
     void transformOpenIssuesVO() {
         //given
         given(statRepository.countOverallStats()).willReturn(createDummyStatVO());
-        given(issueSearchRepository.findIssuesBySearchFilter(any())).willReturn(createDummyOpenIssueVOs());
+        given(issueSearchRepository.findBySearchFilter(any())).willReturn(createDummyOpenIssueVOs());
         given(labelRepository.findAllByIssueIds(any())).willReturn(createDummyLabelVOs());
         given(memberRepository.findAllProfilesByIssueIds(any())).willReturn(createDummyAssigneeProfiles());
 
@@ -72,7 +72,7 @@ class IssueServiceTest {
     void transformClosedIssuesVO() {
         //given
         given(statRepository.countOverallStats()).willReturn(createDummyStatVO());
-        given(issueSearchRepository.findIssuesBySearchFilter(any())).willReturn((createDummyClosedIssueVOs()));
+        given(issueSearchRepository.findBySearchFilter(any())).willReturn((createDummyClosedIssueVOs()));
         given(labelRepository.findAllByIssueIds(any())).willReturn(createDummyLabelVOs());
         given(memberRepository.findAllProfilesByIssueIds(any())).willReturn(createDummyAssigneeProfiles());
 

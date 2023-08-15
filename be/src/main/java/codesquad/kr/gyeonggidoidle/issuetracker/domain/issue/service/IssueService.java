@@ -37,7 +37,7 @@ public class IssueService {
     public SearchInformation findIssuesBySearchFilter(String searchFilterCondition) {
         StatVO statVO = statRepository.countOverallStats();
         SearchFilter searchFilter = SearchFilter.from(searchFilterCondition);
-        List<IssueSearchResult> issueSearchResults = issueSearchRepository.findIssuesBySearchFilter(searchFilter);
+        List<IssueSearchResult> issueSearchResults = issueSearchRepository.findBySearchFilter(searchFilter);
         List<Long> issueIds = getIssueIds(issueSearchResults);
         Map<Long, List<LabelVO>> labelVOs = labelRepository.findAllByIssueIds(issueIds);
         Map<Long, List<String>> assigneeProfiles = memberRepository.findAllProfilesByIssueIds(issueIds);

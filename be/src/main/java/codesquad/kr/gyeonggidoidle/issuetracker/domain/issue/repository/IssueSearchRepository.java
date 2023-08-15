@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface IssueSearchRepository {
 
-    public List<IssueSearchResult> findIssuesBySearchFilter(SearchFilter searchFilter);
+    public List<IssueSearchResult> findBySearchFilter(SearchFilter searchFilter);
 }
