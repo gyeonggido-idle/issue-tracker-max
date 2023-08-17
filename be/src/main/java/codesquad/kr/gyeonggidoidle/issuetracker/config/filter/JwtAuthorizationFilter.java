@@ -22,7 +22,8 @@ import org.springframework.util.PatternMatchUtils;
 
 public class JwtAuthorizationFilter implements Filter {
 
-    private final String[] whiteListUris = new String[]{"/api/login", "/api/signup", "/api/auth/reissue", "/api/login/**"};
+//    private final String[] whiteListUris = new String[]{"/api/login", "/api/signup", "/api/auth/reissue", "/api/login/**"};
+    private final String[] whiteListUris = new String[]{"*"};
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper;
 

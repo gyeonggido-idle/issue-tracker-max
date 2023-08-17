@@ -1,12 +1,12 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service;
 
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.comment.repository.CommentRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.comment.Comment;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.comment.repository.CommentRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.comment.repository.result.CommentResult;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.SearchFilter;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.Issue;
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.IssueSearchRepository;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.SearchFilter;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.IssueRepository;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.IssueSearchRepository;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.result.IssueDetailResult;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.repository.result.IssueSearchResult;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition.IssueCreateCondition;
@@ -66,13 +66,12 @@ public class IssueService {
     public void createIssue(IssueCreateCondition condition) {
         Issue issue = IssueCreateCondition.toIssue(condition);
         Long createdId = issueRepository.saveIssue(issue);
-        Comment comment = null;
+        Comment comment;
 
         if (condition.hasComment()) {
             comment = IssueCreateCondition.toComment(createdId, condition);
-            Long fileUrl = comment.isFileExist()? commentRepository.updateFile(comment.getFile()) : null;
             if (comment.isContentsExist()) {
-                commentRepository.createComment(fileUrl, comment);
+                commentRepository.save(comment);
             }
         }
         if (condition.hasAssignees()) {
