@@ -7,10 +7,10 @@ values ('nag@codesquad.kr', 'nag', '1q2w3e4r!',
         'https://source.boringavatars.com/beam/20/ati');
 
 INSERT INTO milestone (name, due_date, is_open)
-values ('마일스톤 1', current_date, 1),
-       ('마일스톤 2', current_date, 0),
-       ('마일스톤 3', current_date, 1),
-       ('마일스톤 0', current_date, 1);
+values ('마일스톤1', current_date, 1),
+       ('마일스톤2', current_date, 0),
+       ('마일스톤3', current_date, 1),
+       ('마일스톤0', current_date, 1);
 
 INSERT INTO label (name, background_color, text_color)
 values ('라벨1', '#F08080', '#000000'),
