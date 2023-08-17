@@ -1,4 +1,4 @@
-package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue;
+package codesquad.kr.gyeonggidoidle.issuetracker.domain.comment;
 
 import lombok.Builder;
 import lombok.Getter;

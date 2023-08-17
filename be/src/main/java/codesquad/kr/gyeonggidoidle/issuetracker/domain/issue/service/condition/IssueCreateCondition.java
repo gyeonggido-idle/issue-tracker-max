@@ -1,6 +1,6 @@
 package codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.service.condition;
 
-import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.Comment;
+import codesquad.kr.gyeonggidoidle.issuetracker.domain.comment.Comment;
 import codesquad.kr.gyeonggidoidle.issuetracker.domain.issue.Issue;
 import lombok.Builder;
 import lombok.Getter;
