@@ -6,7 +6,6 @@ DROP Table if exists label;
 DROP Table if exists milestone;
 DROP Table if exists refresh_token;
 DROP Table if exists member;
-DROP Table if exists file;
 
 CREATE TABLE member
 (
